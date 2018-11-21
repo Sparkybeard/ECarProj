@@ -25,23 +25,22 @@ public class ECarApp {
 		String uddiURL = null;
 		String wsName = null;
 		String wsURL = null;
-		boolean primary;
-		String wsi = null;
+		String primary = null;
 
 		// Create server implementation object, according to options
 		ECarEndpointManager endpoint = null;
 		if (args.length == 2) {
 			wsURL = args[0];
-			wsi = args[1];
-			endpoint = new ECarEndpointManager(wsURL, wsi);
+			primary = args[1];
+			endpoint = new ECarEndpointManager(wsURL, primary);
 			
 		} else if (args.length >= 4) {
 			uddiURL = args[0];
 			wsName = args[1];
 			wsURL = args[2];
-			wsi = args[3];
+			primary = args[3];
 			
-			endpoint = new ECarEndpointManager(uddiURL, wsName, wsURL, wsi);
+			endpoint = new ECarEndpointManager(uddiURL, wsName, wsURL, primary);
 			endpoint.setVerbose(true);
 		}
 
@@ -65,6 +64,7 @@ public class ECarApp {
 		} catch (IOException e) {
 			System.out.printf("Failed to load configuration: %s%n", e);
 		}
+
 
 		try {
 			endpoint.start();

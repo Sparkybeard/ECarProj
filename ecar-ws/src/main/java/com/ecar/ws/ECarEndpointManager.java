@@ -22,8 +22,7 @@ public class ECarEndpointManager {
 	/** Web Service location to publish */
 	private String wsURL = null;
 	
-	private String wsi = null;
-	private boolean primary;
+	private String primary = null;
 
 	/** Port implementation */
 	private ECarPortImpl portImpl = new ECarPortImpl(this);
@@ -55,20 +54,20 @@ public class ECarEndpointManager {
 	}
 
 	/** constructor with provided UDDI location, WS name, and WS URL */
-	public ECarEndpointManager(String uddiURL, String wsName, String wsURL, String wsi) {
+	public ECarEndpointManager(String uddiURL, String wsName, String wsURL, String primary) {
 		this.uddiURL = uddiURL;
 		this.wsName = wsName;
 		this.wsURL = wsURL;
-		this.wsi= wsi;
+		this.primary= primary;
 	}
 
 	/** constructor with provided web service URL*/ 
 	 
-	public ECarEndpointManager(String wsURL, String wsi) {
-		if (wsURL == null || wsi== null)
+	public ECarEndpointManager(String wsURL, String primary) {
+		if (wsURL == null || primary== null)
 			throw new NullPointerException("Web Service URL cannot be null!");
 		this.wsURL = wsURL;
-		this.wsi= wsi;
+		this.primary= primary;
 	}
 
 	/* end point management */
@@ -104,6 +103,10 @@ public class ECarEndpointManager {
 				System.out.printf("Caught i/o exception when awaiting requests: %s%n", e);
 			}
 		}
+	}
+
+	public String getPrimaryStatus() {
+		return primary;
 	}
 
 	public void stop() throws Exception {

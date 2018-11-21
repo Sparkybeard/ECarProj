@@ -123,7 +123,7 @@
 						<argument>${ws.name}</argument>
 						<argument>${ws.url}</argument>
 						<argument>${primary}</argument>
-					<!--	<argument>${park.ws.name.pattern}</argument> -->
+						<argument>${park.ws.name.pattern}</argument>
 					</arguments>
 				</configuration>
 			</plugin>

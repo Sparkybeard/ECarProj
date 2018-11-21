@@ -25,7 +25,7 @@ import com.ecar.park.ws.ParkInfo;
 import com.ecar.park.ws.ParkStats;
 import com.ecar.park.ws.cli.ParkClient;
 import com.ecar.park.ws.cli.ParkClientException;
-
+import java.util.Timer;
 import pt.ulisboa.tecnico.sdis.ws.uddi.UDDINaming;
 import pt.ulisboa.tecnico.sdis.ws.uddi.UDDINamingException;
 
@@ -41,6 +41,9 @@ public class ECarPortImpl implements ECarPortType {
 	
 	// end point manager
 	private ECarEndpointManager endpointManager;
+
+	boolean primaryStatus;
+	private Timer timestamp;
 
 	public ECarPortImpl(ECarEndpointManager endpointManager) {
 		this.endpointManager = endpointManager;
@@ -265,10 +268,27 @@ public class ECarPortImpl implements ECarPortType {
 		}
 	}
 
+
+	public boolean primaryToBoolean() {
+		if (endpointManager.getPrimaryStatus() == "true") {
+			primaryStatus = true;
+		}
+		else {primaryStatus = false;}
+		return primaryStatus;
+	}
+
 	@Override
 	public void imAlive() {
-		//
+		if (primaryStatus){
 
+		}
+
+
+	}
+
+	public void secundaryTimer() {
+		//torna o serv secundario no primario quando o delay acaba
+		this.schedule(turnToPrimary(), timestamp);
 	}
 
 
